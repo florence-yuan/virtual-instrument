@@ -16,3 +16,8 @@ Go to 'Your Recordings' to view your recordings. You may download, delete, and r
 ![View of instruments](assets/piano_instruments.png)
 
 [View full list of available instruments here.](https://raw.githubusercontent.com/danigb/soundfont-player/master/names/musyngkite.json)
+
+## Metronome
+![View of metronome](assets/piano_metronome.png)
+
+Click / drag to change the tempo.  Click 'start' to begin, and click the resize button to minimize the metronome window.
