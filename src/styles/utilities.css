@@ -1,0 +1,395 @@
+/* Widget Styles */
+
+.widget {
+    position: absolute;
+    bottom: 9rem;
+    left: 3rem;
+}
+
+.widget__main {
+    position: relative;
+    display: flex;
+    min-width: 3rem;
+    max-width: 20rem;
+    height: 3rem;
+    align-items: center;
+    gap: 1rem;
+    background-color: #1f1f1f;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 0.4rem 0.5rem 0.8rem;
+    max-width: 20rem;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+}
+
+.widget__main::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url(../images/metronome_full2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+    transition: inherit;
+    transition-delay: 0s;
+}
+
+.widget__main.folded {
+    max-width: 3rem;
+    border-radius: 50%;
+    border-width: 2px;
+    cursor: pointer;
+}
+
+.widget__main.folded:hover {
+    border-color: var(--violet-hover);
+}
+
+.widget__main.folded::before {
+    opacity: 0.8;
+    transform: translate(-50%, -50%);
+    transition-delay: 0.2s;
+}
+
+@media (max-width: 1150px) {
+    .widget {
+        left: calc(1rem + 1vw);
+    }
+
+    .widget__main {
+        flex-direction: column;
+        gap: 0.5rem;
+        border-radius: 20px;
+        height: 4.5rem;
+    }
+
+    .widget__close-btn {
+        margin: 0 !important;
+        position: absolute;
+        bottom: 0.4rem;
+        right: 0.4rem;
+    }
+}
+
+.widget__content {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.widget__main > * {
+    overflow: hidden;
+    max-width: 10rem;
+    transition: inherit;
+}
+
+.widget__main.folded > * {
+    max-width: 0;
+}
+
+.widget__content:hover {
+    cursor: pointer;
+    color: white;
+    text-decoration: underline 1px solid;
+    text-underline-offset: 2px;
+}
+
+.widget__btn {
+    background-color: var(--violet);
+    border: none;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem 0.25rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.widget__main.folded .widget__btn {
+    display: none;
+}
+
+.widget__btn:hover {
+    cursor: pointer;
+    background-color: var(--violet-hover);
+}
+
+.widget__btn:active {
+    border: 1px solid var(--violet);
+}
+
+.widget__close-btn {
+    margin-left: -0.7rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    background-image: url(../images/close.svg);
+    background-size: 70%;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Audio Styles */
+
+.audio-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.audio {
+    display: none;
+}
+
+.audio__btn {
+    background-color: transparent;
+    border: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-repeat: no-repeat;
+    background-position: left center;
+    transition: all 0.2s ease-in-out;
+}
+
+.audio__btn--play {
+    background-image: url(../images/play.svg);
+    background-size: 85%;
+    background-position-x: 15%;
+}
+
+.audio-entry.on .audio__btn--play:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.audio__btn--pause {
+    background-image: url(../images/pause.svg);
+    background-size: 100%;
+}
+
+.audio__label {
+    width: 2rem;
+    height: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e4d7f7;
+    line-height: 1;
+    font-weight: 500;
+    background-color: var(--violet-bg);
+    border-radius: 50%;
+}
+
+.audio__inner {
+    width: 100%;
+}
+
+.audio__inner.no-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.audio__title-wrapper {
+    position: relative;
+    display: block;
+    width: 10rem;
+}
+
+.audio-entry.off .audio__title-wrapper {
+    pointer-events: none;
+}
+
+.audio__title {
+    width: 100%;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #eee;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: all 0.25s ease-in-out;
+}
+
+.audio__title:focus {
+    color: var(--violet);
+}
+
+.audio__title-underline {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-top: 1px solid var(--violet);
+    transform: scaleX(0.5);
+    opacity: 0;
+    transform-origin: left;
+    transition: all 0.25s ease-in-out;
+}
+
+.audio__title:focus + .audio__title-underline {
+    transform: none;
+    opacity: 1;
+}
+
+.audio__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.audio__more {
+    position: relative;
+    z-index: 10;
+}
+
+.audio__more-btn {
+    width: 2rem;
+    height: 2rem;
+    background-image: url(../images/more.svg);
+    background-size: 75%;
+}
+
+.audio__actions {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background-color: #2f3131;
+    padding: 0.3rem 0;
+    border-radius: 5px;
+    transform-origin: right top;
+    transition: all 0.25s ease-in-out;
+}
+
+.audio__actions.off {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+.audio__actions.on {
+    opacity: 1;
+    transform: none;
+}
+
+.audio__act {
+    padding: 0.5rem 1rem 0.6rem 2.4rem;
+    background-position: 9% center;
+    background-repeat: no-repeat;
+    background-size: 16%;
+    transition: all 0.2s ease-in-out;
+}
+
+.audio__act:hover {
+    cursor: pointer;
+    background-color: rgba(122, 122, 122, 0.2);
+}
+
+.audio__act--delete {
+    background-image: url(../images/delete.svg);
+}
+
+.audio__act--download {
+    background-image: url(../images/download.svg);
+}
+
+.audio__duration {
+    width: max-content;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #aaa;
+}
+
+.audio__dur-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    background-image: url(../images/clock.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.audio__inner.controls .audio__duration {
+    margin-top: 0.6rem;
+}
+
+@keyframes fadeScaleIn {
+    from {
+        opacity: 0;
+        transform: translateY(10%) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.audio__track-wrapper {
+    margin: 0.4rem 0 0.6rem;
+    width: calc(100% - 0.5rem);
+    height: 15px;
+    display: flex;
+    align-items: center;
+    transform: none;
+    transform-origin: left;
+    transition: all 0.3s ease-in-out;
+
+    animation-name: fadeScaleIn;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.audio__track-wrapper:hover {
+    cursor: pointer;
+}
+
+.audio__track {
+    width: 100%;
+    height: 3px;
+    background-color: #aaaaaab7;
+    border-radius: 3px;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.audio__track-wrapper:hover .audio__track {
+    height: 5px;
+}
+
+.audio__played {
+    position: relative;
+    height: 100%;
+    background-color: white;
+    border-radius: inherit;
+}
+
+.audio__thumb {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+}
+
+.audio__thumb.off {
+    transform: scale(0) translate(50%, -50%);
+    opacity: 0;
+}
+
+.audio__track-wrapper:hover .audio__thumb {
+    transform: scale(1.1) translate(50%, -50%);
+}

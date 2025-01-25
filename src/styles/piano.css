@@ -1,0 +1,323 @@
+.piano-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+
+.piano-inner {
+    position: relative;
+    --num-keys: 36;
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+    perspective: 100px;
+    transform-style: preserve-3d;
+}
+
+.piano {
+    --border-style: 1px solid var(--piano-border-color);
+    --piano-padding: min(2.5rem, 3vw);
+
+    --piano-height: calc(var(--key-height) + 4rem);
+    --key-width: min(2.2rem, max(1.5rem, calc((100vw - 2 * var(--piano-padding) - 3rem) / var(--num-keys))));
+    --key-height: min(11rem, max(9rem, calc(var(--key-width) * 5.8)));
+
+    position: relative;
+    margin: 0 auto;
+    transform-origin: top;
+    transform: rotateX(1deg);
+    transform-style: preserve-3d;
+
+    padding: 0 var(--piano-padding) var(--piano-padding);
+    height: var(--piano-height);
+
+    z-index: 0;
+}
+
+.piano::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    --black-bg-height: calc(var(--piano-height) - var(--piano-padding));
+    background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0), 40%, rgba(255, 255, 255, 0.1), 60%, rgba(255, 255, 255, 0)),
+    linear-gradient(to bottom, black var(--black-bg-height), transparent var(--black-bg-height)),
+    linear-gradient(to bottom, #242e30, #3b4547);
+    border-radius: 3px;
+    transform: translateZ(-10px) scale(1.1);
+}
+
+.piano::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background-image: linear-gradient(to bottom, #010101, #000000);
+    border-radius: 3px;
+    transform-origin: top;
+    transform: rotateX(-5deg);
+    background-size: cover;
+}
+
+.piano__key-wrapper {
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+}
+
+.piano__key {
+    position: relative;
+    display: inline-block;
+    border-right: var(--border-style);
+    border-top: var(--border-style);
+    transform-style: preserve-3d;
+    transform-origin: top;
+    vertical-align: top;
+}
+
+.piano__key--white {
+    width: var(--key-width);
+    height: var(--key-height);
+    background-color: white;
+    background-image: linear-gradient(to bottom, #f0f2f5, white);
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-image: linear-gradient(
+        to bottom,
+        var(--piano-border-color),
+        var(--piano-border-color2)
+    ) 1;
+    border-radius: 0 0 3px 3px;
+    
+    z-index: 5;
+}
+
+.piano__key--white:active,
+.piano__key--white.piano__key--pressed {
+    height: calc(var(--key-height) * 1.02 + 0.1rem);
+    transform: rotateX(-0.5deg);
+    background-image: linear-gradient(to bottom, #f0f2f5, rgb(245, 244, 244));
+}
+
+.piano__key--white::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100% + 1.3rem);
+    background-color: #d0d1d6;
+    background-image: linear-gradient(to bottom, #f0f2f5, #e5e7e9);
+    transform: translateZ(-2.5px);
+}
+
+.piano__key--white:active::before,
+.piano__key--white.piano__key--pressed::before {
+    display: none;
+}
+
+.piano__key--white .key__shadow {
+    position: absolute;
+    top: 100%;
+    width: calc(100% + 2px);
+    height: 1.3rem;
+    background-color: #a5abc3;
+    background-image: linear-gradient(to bottom, #b7b8bd, #cbccd1);
+    border-right: var(--border-style);
+    border-bottom: var(--border-style);
+    transform-origin: top;
+    transform: rotateX(-5deg) translateZ(-0.5px);
+    z-index: 50;
+}
+
+.piano__key--white:nth-child(1) .key__shadow {
+    margin-left: -1px;
+    width: calc(100% + 3px);
+    border-left: var(--border-style);
+}
+
+.piano__key--white:active .key__shadow,
+.piano__key--white.piano__key--pressed .key__shadow {
+    height: 1.1rem;
+}
+
+.piano__key-wrapper.black {
+    z-index: 10;
+}
+
+.piano__key--black {
+    --black-key-width: calc(0.3rem + var(--key-width) / 2);
+    --black-key-height: min(7rem, max(5rem, calc(var(--black-key-width) * 5)));
+    width: var(--black-key-width);
+    height: var(--black-key-height);
+    margin-left: calc(-1 * var(--black-key-width) / 2);
+    margin-right: calc(-1 * var(--black-key-width) / 2);
+    background-color: rgb(66, 66, 66);
+    background-image: linear-gradient(to right, black, 10%, rgba(0, 0, 0, 0), 90%, black),
+    linear-gradient(to bottom, transparent 5.8rem, rgba(141, 141, 141, 0.5) 5.8rem);
+    border-radius: 0 0 3px 3px;
+    transform-style: preserve-3d;
+    box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.piano__key--black:active,
+.piano__key--black.piano__key--pressed {
+    --black-key-height: min(7.1rem, max(5.1rem, calc(var(--black-key-width) * 5 + 0.1rem)));
+    background-color: rgb(78, 78, 78);
+    background-image: linear-gradient(to right, black, 10%, rgba(0, 0, 0, 0), 90%, black),
+    linear-gradient(to bottom, transparent 5.8rem, rgba(102, 102, 102, 0.5) 5.8rem);
+}
+
+.piano__key--black::before {
+    content: "";
+    --black-key-width: 0.8rem;
+    --height: calc(100% - 0.7rem);
+    position: absolute;
+    top: 0rem;
+    left: calc((100% - var(--black-key-width)) / 2);
+    display: block;
+    width: var(--black-key-width);
+    height: var(--height);
+    background-color: rgb(26, 26, 26);
+    background-image: linear-gradient(to bottom, black, 70%, rgb(39, 39, 39));
+    box-shadow: 0px 1px 5px rgb(66, 66, 66);
+}
+
+.piano__key--black:active::before,
+.piano__key--black.piano__key--pressed::before {
+    --height: calc(100% - 0.6rem);
+}
+
+.key__note {
+    position: relative;
+    top: calc(100% - 2rem);
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+}
+
+.piano__key--black .key__note {
+    color: #e7e6c9;
+    top: calc(100% - 3rem);
+}
+
+/* Piano Headboard */
+
+.piano-headboard {
+    position: relative;
+    width: 100%;
+    perspective: 100px;
+    transform-style: preserve-3d;
+}
+
+.piano__title {
+    text-align: center;
+    padding: 1.5rem;
+    text-transform: uppercase;
+    transform-origin: bottom;
+    transform: rotateX(1deg);
+    background-image: linear-gradient(100deg, #3b4547, 70%, #abbbc3);
+    color: var(--pale-gold);
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.2rem;
+    text-shadow: 0px 1px 2px #000000;
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.piano__band {
+    position: relative;
+    width: 100%;
+    height: 2rem;
+    background-color: #010101;
+}
+
+.piano__band::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-image: url(../images/gold_texture.jpg);
+    background-size: cover;
+    box-shadow: inset 0 1px 2px #a9744a;
+}
+
+/* Loading */
+
+.piano__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, transparent 0%, transparent 73.3px, rgba(72, 75, 75, 0.7) 73.3px, rgba(72, 75, 75, 0.7));
+}
+
+.loading__title {
+    margin-top: 1vw;
+    display: block;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+}
+
+.loading__dots {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 1rem;
+}
+
+@keyframes loading {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.loading__dot {
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: white;
+    border-radius: 50%;
+    animation-name: loading;
+    animation-duration: 0.6s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.loading__dot:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loading__dot:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.loading__error {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.6;
+}

@@ -1,0 +1,188 @@
+.metro-markings {
+    display: flex;
+    height: 405px;
+    line-height: 1;
+    font-size: 0.7rem;
+    user-select: none;
+    color: #c6bc9f;
+    padding: 0 5rem;
+    --border-color: #c6bc9f;
+}
+
+.markings__col {
+    position: relative;
+    width: 5rem;
+    height: 405px;
+    z-index: 20;
+}
+
+.markings__col::before {
+    content: "";
+    position: absolute;
+    width: 0px;
+}
+
+.markings--left::before {
+    top: 6px;
+    right: 0;
+    border-left: 2px solid var(--border-color);
+    height: calc(100% - 18px);
+}
+
+.markings--right::before {
+    top: 10px;
+    left: 0;
+    border-right: 2px solid var(--border-color);
+    height: calc(100% - 22px);
+}
+
+.markings--right::after {
+    content: "";
+    position: absolute;
+    bottom: 11px;
+    left: 0;
+    width: 2rem;
+    height: 0;
+    border-top: 2px solid var(--border-color);
+}
+
+.marking {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center
+}
+
+.marking--left {
+    justify-content: right;
+}
+
+.marking--right {
+    justify-content: left;
+}
+
+.marking__line {
+    width: 2rem;
+    height: 0;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.metro__labels {
+    position: relative;
+    width: 4rem;
+}
+
+.metro__label {
+    position: absolute;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    opacity: 0.8;
+    width: 100%;
+    color: var(--pale-gold);
+    text-align: center;
+}
+
+/* Pendulum */
+
+@keyframes beat {
+    from {
+        transform: rotate(-30deg);
+    }
+    to {
+        transform: rotate(30deg);
+    }
+}
+
+.pendulum {
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    width: 3.3rem;
+    height: calc(100% + 2rem);
+    translate: -50% 0;
+    transform-origin: bottom;
+    cursor: pointer;
+    z-index: 40;
+}
+
+.pendulum.on {
+    animation-name: beat;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.pendulum__slider {
+    margin: 0 auto;
+    width: 8px;
+    height: 100%;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: linear-gradient(to bottom, rgba(139, 139, 139, 0.5), 60%, rgba(255, 255, 255, 0.9), 68%, rgba(192, 192, 192, 0.5), 90%, transparent 98%);
+    border-radius: 1px;
+    box-shadow: inset 1px 0px 1px rgba(255, 255, 255, 0.5),
+    inset -1px 0px 1px rgba(255, 255, 255, 0.5);
+}
+
+.pendulum__head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.2rem;
+    background-image: url(../images/metronome.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: grab;
+    transform-origin: top;
+    transition: all 0.2s ease-in-out, translate 0s;
+}
+
+.pendulum__head:active {
+    cursor: move;
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+/* Attrs */
+
+.metro-attrs {
+    padding: 0.5rem 0.5rem 1rem;
+}
+
+.attrs-flex {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.metro__attr {
+    color: #ccc;
+}
+
+.metro__attr--note {
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.metro__btn {
+    color: black;
+    background-color: var(--violet);
+    border: 1px solid transparent;
+    outline: none;
+    font-weight: 500;
+    padding: 0.15rem 0.4rem 0.2rem;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.metro__btn:hover {
+    cursor: pointer;
+    background-color: rgba(238, 130, 238, 0.7);
+}
+
+.metro__btn:active {
+    border: 1px solid rgb(255, 183, 255);
+}
