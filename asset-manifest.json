@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/virtual-instrument/static/css/main.4c17dd95.css",
+    "main.js": "/virtual-instrument/static/js/main.e77f348e.js",
+    "static/js/453.2c97d9b6.chunk.js": "/virtual-instrument/static/js/453.2c97d9b6.chunk.js",
+    "static/media/metronome.png": "/virtual-instrument/static/media/metronome.ad1bd4997043f1bbc08b.png",
+    "static/media/note_dm2.png": "/virtual-instrument/static/media/note_dm2.5d5e82038f7b3ede3667.png",
+    "static/media/key_dm2.png": "/virtual-instrument/static/media/key_dm2.e72e67b38ac33b28da76.png",
+    "static/media/github.svg": "/virtual-instrument/static/media/github.50558b4219a4ca618c15.svg",
+    "index.html": "/virtual-instrument/index.html",
+    "static/media/play.svg": "/virtual-instrument/static/media/play.aebfc4159bf9197c8588.svg",
+    "static/media/clock.svg": "/virtual-instrument/static/media/clock.0ea5184f8c4bbfe41f43.svg",
+    "static/media/more.svg": "/virtual-instrument/static/media/more.4be310fd6c52544ea0b9.svg",
+    "static/media/delete.svg": "/virtual-instrument/static/media/delete.5bfaca79cb0cea931db8.svg",
+    "static/media/download.svg": "/virtual-instrument/static/media/download.d42bec47d776016370ef.svg",
+    "static/media/maximize.svg": "/virtual-instrument/static/media/maximize.808300ad025bd4dc85b0.svg",
+    "static/media/minimize.svg": "/virtual-instrument/static/media/minimize.8d03e7e769aaa2c0964c.svg",
+    "static/media/close.svg": "/virtual-instrument/static/media/close.7ec423f9a773245bc2d1.svg",
+    "static/media/back.svg": "/virtual-instrument/static/media/back.96471cc888c50c420c48.svg",
+    "static/media/pause.svg": "/virtual-instrument/static/media/pause.53c4a56462215e0d966a.svg",
+    "main.4c17dd95.css.map": "/virtual-instrument/static/css/main.4c17dd95.css.map",
+    "main.e77f348e.js.map": "/virtual-instrument/static/js/main.e77f348e.js.map",
+    "453.2c97d9b6.chunk.js.map": "/virtual-instrument/static/js/453.2c97d9b6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4c17dd95.css",
+    "static/js/main.e77f348e.js"
+  ]
+}
