@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/virtual-instrument/static/css/main.4c17dd95.css",
-    "main.js": "/virtual-instrument/static/js/main.e77f348e.js",
+    "main.js": "/virtual-instrument/static/js/main.63ab0548.js",
     "static/js/453.2c97d9b6.chunk.js": "/virtual-instrument/static/js/453.2c97d9b6.chunk.js",
     "static/media/metronome.png": "/virtual-instrument/static/media/metronome.ad1bd4997043f1bbc08b.png",
     "static/media/note_dm2.png": "/virtual-instrument/static/media/note_dm2.5d5e82038f7b3ede3667.png",
@@ -19,11 +19,11 @@
     "static/media/back.svg": "/virtual-instrument/static/media/back.96471cc888c50c420c48.svg",
     "static/media/pause.svg": "/virtual-instrument/static/media/pause.53c4a56462215e0d966a.svg",
     "main.4c17dd95.css.map": "/virtual-instrument/static/css/main.4c17dd95.css.map",
-    "main.e77f348e.js.map": "/virtual-instrument/static/js/main.e77f348e.js.map",
+    "main.63ab0548.js.map": "/virtual-instrument/static/js/main.63ab0548.js.map",
     "453.2c97d9b6.chunk.js.map": "/virtual-instrument/static/js/453.2c97d9b6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4c17dd95.css",
-    "static/js/main.e77f348e.js"
+    "static/js/main.63ab0548.js"
   ]
 }
