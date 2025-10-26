@@ -95,7 +95,7 @@
     z-index: 5;
 }
 
-.piano__key--white:active,
+.piano__key-wrapper.white:active .piano__key--white,
 .piano__key--white.piano__key--pressed {
     height: calc(var(--key-height) * 1.02 + 0.1rem);
     transform: rotateX(-0.5deg);
@@ -116,7 +116,7 @@
     transform: translateZ(-2.5px);
 }
 
-.piano__key--white:active::before,
+.piano__key-wrapper.white:active .piano__key--white::before,
 .piano__key--white.piano__key--pressed::before {
     display: none;
 }
@@ -141,7 +141,7 @@
     border-left: var(--border-style);
 }
 
-.piano__key--white:active .key__shadow,
+.piano__key-wrapper.white:active .piano__key--white .key__shadow,
 .piano__key--white.piano__key--pressed .key__shadow {
     height: 1.1rem;
 }
@@ -166,7 +166,7 @@
     z-index: 10;
 }
 
-.piano__key--black:active,
+.piano__key-wrapper.black:active .piano__key--black,
 .piano__key--black.piano__key--pressed {
     --black-key-height: min(7.1rem, max(5.1rem, calc(var(--black-key-width) * 5 + 0.1rem)));
     background-color: rgb(78, 78, 78);
@@ -189,7 +189,7 @@
     box-shadow: 0px 1px 5px rgb(66, 66, 66);
 }
 
-.piano__key--black:active::before,
+.piano__key-wrapper.black:active .piano__key--black::before,
 .piano__key--black.piano__key--pressed::before {
     --height: calc(100% - 0.6rem);
 }
@@ -214,6 +214,7 @@
     width: 100%;
     perspective: 100px;
     transform-style: preserve-3d;
+    z-index: 30;
 }
 
 .piano__title {

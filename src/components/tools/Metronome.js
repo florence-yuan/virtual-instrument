@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import './../../styles/metronome.css'
 import { useRef, useState } from 'react';
+import { Sampler } from 'smplr';
 
 const leftMarkings = [40, 44, 48, 52, 56, 60, 66, 72,
     80, 88, 96, 104, 112, 120, 132, 144, 160, 176, 192, 208
@@ -31,7 +32,26 @@ const metroLabels = [
 const audio = new Audio();
 const audio2 = new Audio();
 const audio3 = new Audio();
-audio.src = audio2.src = audio3.src = '/sounds/metronome.mp3';
+audio.src = audio2.src = audio3.src = process.env.PUBLIC_URL + '/sounds/metronome.mp3';
+
+/* console.log(process.env.PUBLIC_URL)
+audio.addEventListener("canplaythrough", () => {
+    console.log(audio)
+}) */
+
+/* const metroSampler = new Sampler(new AudioContext(), {
+    beat: process.env.PUBLIC_URL + '/sounds/metronome.mp3',
+    kick: "https://smpldsnds.github.io/drum-machines/808-mini/kick.m4a",
+});
+metroSampler.load.then(() => {
+    console.log(metroSampler)
+    metroSampler.start({
+        note: "kick",
+        loop: true,
+        loopStart: 1.0,
+        loopEnd: 9.0,
+    });
+}); */
 
 const sounds = [audio, audio2, audio3];
 
@@ -61,7 +81,7 @@ export default function Metronome({ isOn, setTool, CloseBtn }) {
 
         const { top, bottom, height } = mref.current.getBoundingClientRect();
 
-        const clientY = e.clientY - startClientY.current / 2;
+        const clientY = e.clientY - startClientY.current;
         if (clientY < top || clientY > bottom)
             return;
 
@@ -73,7 +93,7 @@ export default function Metronome({ isOn, setTool, CloseBtn }) {
         }
     }
 
-    const [isFolded, setFolded] = useState(false);
+    const [isFolded, setFolded] = useState(true);
 
     return (
         <>
@@ -186,10 +206,6 @@ export default function Metronome({ isOn, setTool, CloseBtn }) {
                                 className={'pendulum ' + (isMetroOn ? 'on' : 'off')}
                                 style={{
                                     animationDuration: (60 / tempo) + 's'
-                                }}
-                                onClick={(e) => {
-                                    startClientY.current = 0;
-                                    handleNewTempo(e);
                                 }}
                                 onMouseUp={() => { setMouseDown(false) }}
                                 onMouseMove={(e) => {

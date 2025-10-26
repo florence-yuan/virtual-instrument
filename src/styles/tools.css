@@ -1,5 +1,5 @@
 .piano__tools {
-    --height: 23rem;
+    --height: 25rem;
     position: absolute;
     top: calc(-1 * var(--height));
     left: -0.3rem;
@@ -14,16 +14,35 @@
     align-items: center;
 
     color: #eee;
+    transform-style: preserve-3d;
 
     transition: all 0.3s ease-in-out;
 }
 
+.piano__tools::before {
+    content: "";
+    position: absolute;
+    bottom: 6.5rem;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 8.5rem;
+    background-image: url(../images/wood2.jpg), url(../images/gold_texture.avif);
+    background-blend-mode: multiply;
+    filter: saturate(0.6) opacity(0.8);
+    box-shadow: inset 0px -10px 10px rgba(0, 0, 0, 0.2);
+}
+
 .tools__inner {
-    width: 40rem;
-    height: 100%;
-    margin: 0 auto;
+    position: absolute;
+    bottom: 10rem;
+    left: 50%;
+    height: max-content;
     width: max-content;
     display: flex;
+    align-items: flex-end;
+    transform: translateX(-50%);
+    z-index: 30;
 }
 
 .tools__back {
@@ -70,6 +89,7 @@
 .piano__tool {
     display: flex;
     align-items: center;
+    max-height: 10rem;
     transform: translateY(2rem);
     transition: all 0.3s ease-in-out;
 }
@@ -125,6 +145,14 @@
     transition: all 0.2s ease-in-out;
 }
 
+.piano__tool--on .tool__extend .tool__label {
+    top: 20.5rem;
+}
+
+/* .tool__extend .tool__label {
+    color: #b89030;
+} */
+
 .tool__btn:hover .tool__label,
 .tool__label:hover {
     color: var(--violet);
@@ -155,28 +183,32 @@
 
 .tool__extend {
     position: absolute;
-    top: 0;
+    /* top: 0; */
     left: 50%;
+    bottom: -6rem;
     height: 100%;
     width: 30rem;
+    min-height: 26rem;
     opacity: 0;
     overflow: hidden;
     pointer-events: none;
     clip-path: inset(0 100% 0 0);
     border-radius: 10px 10px 0 0;
+    overflow-y: hidden;
     transform: translateX(-50%);
     transition: all 0.3s ease-in-out;
 }
 
 .tool__extend.folded {
     height: max-content;
+    /* pointer-events: none !important; */
 }
 
 .piano__tool--on .tool__extend {
     width: 30rem;
     opacity: 1;
     pointer-events: all;
-    overflow: auto;
+    /* overflow: auto; */
     clip-path: inset(0);
 }
 
@@ -228,7 +260,7 @@
 
 .piano__tool--off .icon--recorder {
     transform: scale(0.8);
-    border: 3.5px solid white;
+    border: 3.5px solid #e4b66d;
 }
 
 .piano__tool--on .icon--recorder::after {
@@ -287,7 +319,7 @@
     align-items: center;
     transform: translateX(-50%);
     transition: all 0.3s ease-in-out;
-    z-index: 20;
+    z-index: 40;
 }
 
 .tool__popup.off {
@@ -309,7 +341,7 @@
 
 .popup__min {
     position: absolute;
-    top: 1.5rem;
+    top: 1.25rem;
     right: 1rem;
     width: 2.4rem;
     height: 2.4rem;
@@ -382,10 +414,10 @@
     pointer-events: all;
     opacity: 1;
 
-    mask: linear-gradient(to bottom, 
+/*     mask: linear-gradient(to bottom, 
     rgba(0, 0, 0, 1) 0,   rgba(0, 0, 0, 1) 80%, 85%,
     rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0) 0
-    ) 100% 50% / 100% 100% repeat-x;
+    ) 100% 50% / 100% 100% repeat-x; */
 
     transition: all 0.3s ease-in-out;
 }
@@ -453,8 +485,8 @@
     outline: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     width: 20rem;
-    font-size: 1.2rem;
-    padding-bottom: 0.2rem;
+    font-size: 1.1rem;
+    padding-bottom: 0.25rem;
     color: white;
     transition: all 0.2s ease-in-out;
 }

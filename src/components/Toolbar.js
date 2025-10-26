@@ -4,13 +4,14 @@ import Display from "./tools/Display";
 import Metronome from "./tools/Metronome";
 import './../styles/tools.css'
 import { useState } from "react";
+import MusicSheet from "./MusicSheet";
 
-function Tool({isOn, label, tool, setTool, children}) {
+function Tool({ isOn, label, tool, setTool, children }) {
 
     return (
         <div
             className={'piano__tool tool--recorder ' + (isOn ? 'piano__tool--on' : 'piano__tool--off')}
-            
+
         >
             <div
                 className="tool__btn"
@@ -26,9 +27,9 @@ function Tool({isOn, label, tool, setTool, children}) {
     )
 }
 
-export default function Toolbar({pianoRecRef, isRecording, setRecording, attrs, setAttrs}) {
+export default function Toolbar({ pianoRecRef, isRecording, setRecording, attrs, setAttrs, ctxRef, tickCtxRef, staveRef, rendererRef, setSheetRec, clearSheet }) {
     const [curTool, setTool] = useState(null);
-    
+
     const CloseBtn = <button
         className="btn--icon extend__close"
         title="Close"
@@ -36,7 +37,7 @@ export default function Toolbar({pianoRecRef, isRecording, setRecording, attrs, 
             setTool(null);
         }}
     />;
-    
+
     const BackBtn = <button
         className="btn--icon extend__back"
         title="Close"
@@ -98,19 +99,28 @@ export default function Toolbar({pianoRecRef, isRecording, setRecording, attrs, 
                 Back
             </button>}
             <div className="tools__inner">
-            {tools.map(({name, comp, label}) => (
-                <Tool
-                    key={name}
-                    label={label}
-                    isOn={curTool === name}
-                    tool={name}
-                    setTool={setTool}
-                    setAttrs={setAttrs}
-                >
-                    {comp}
-                </Tool>
-            ))}
+                {tools.map(({ name, comp, label }) => (
+                    <Tool
+                        key={name}
+                        label={label}
+                        isOn={curTool === name}
+                        tool={name}
+                        setTool={setTool}
+                        setAttrs={setAttrs}
+                    >
+                        {comp}
+                    </Tool>
+                ))}
             </div>
+            <MusicSheet
+                ctxRef={ctxRef}
+                tickCtxRef={tickCtxRef}
+                staveRef={staveRef}
+                rendererRef={rendererRef}
+                hide={curTool !== null && curTool !== 'recorder'}
+                setSheetRec={setSheetRec}
+                clearSheet={clearSheet}
+            />
         </div>
     )
 }

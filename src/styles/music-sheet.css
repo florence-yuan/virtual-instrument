@@ -1,0 +1,129 @@
+.sheet-overlay {
+    position: absolute;
+    top: -5.26rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    z-index: 20;
+}
+
+.sheet-overlay::before {
+    content: "";
+    position: fixed;
+    top: -10vh;
+    left: -30vw;
+    width: 150vw;
+    height: 110vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
+}
+
+.sheet-overlay.enlarged::before {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.sheet-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(10%) scale(0.95);
+}
+
+.sheet-overlay.enlarged {
+    position: absolute;
+    top: -5rem;
+    left: 50%;
+    height: 85vh;
+    transform: translateX(-50%) translateZ(3px);
+    z-index: 50;
+}
+
+.sheet-overlay.enlarged .sheet-viewport,
+.sheet-overlay.enlarged #music-sheet {
+    height: 100%;
+}
+
+.sheet-overlay.enlarged .sheet-viewport {
+    mask-image: none;
+}
+
+.sheet-viewport {
+    height: 350px;
+    border: 1px solid gainsboro;
+    border-bottom: none;
+    mask-image: linear-gradient(to bottom, rgb(0, 0, 0), 96%, rgba(0, 0, 0, 0));
+    overflow-y: auto;
+    background-color: white;
+}
+
+#music-sheet {
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+button {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.vf-stave {
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+}
+
+/* .vf-stavenote:hover,
+.vf-stavenote:hover + text {
+    fill: lightskyblue;
+    background-color: rebeccapurple;
+} */
+
+/* svg text {
+    font-family: 'Bravura';
+} */
+
+.sheet__sidebar {
+    position: absolute;
+    right: -1rem;
+    top: 10rem;
+    transform: translateX(100%);
+    /* background-color: #101010; */
+}
+
+.sidebar__action {
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+    padding: 0.5em 0.8em 0.3em 0.5em;
+    border-radius: 6px;
+}
+
+.sidebar__action:hover {
+    cursor: pointer;
+    background-color: rgba(110, 110, 110, 0.3);
+}
+
+.sidebar__action + .sidebar__action {
+    margin-top: .2em;
+}
+
+.sidebar__icon {
+    background-color: transparent;
+    border: none;
+}
+
+.sidebar__label {
+    text-transform: capitalize;
+}

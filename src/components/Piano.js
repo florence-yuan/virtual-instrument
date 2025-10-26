@@ -1,46 +1,15 @@
 import { Soundfont, Reverb, SplendidGrandPiano } from "smplr"
 import './../styles/piano.css'
 import { useEffect, useRef, useState } from "react";
+import { getKeyConfigs, formatNotation } from "./tools/UtilFuncs";
 
-const NOTES = [];
-
-const midRangeLetters = ['Q', '2', 'W', '3', 'E', '4', 'R', 'T', '6', 'Y', '7', 'U', 'I', '9', 'O', '0', 'P',
-    'A', 'Z', 'X', 'D', 'C', 'F', 'V', 'B', 'H', 'N', 'J', 'M', 'K', ',', '.'
-];
-const midRangeNotes = [17, 17 + midRangeLetters.length - 1];
-const letterToNote = {};
-const noteToLetter = {};
-
-const noteRangeLen = 60;
-
-let letterInd = 2;
-for (let midi = 0; midi < noteRangeLen; midi++) {
-    const letter = String.fromCharCode(letterInd + "A".charCodeAt(0));
-    const num = 2 + Math.floor((midi - 36) / 12);
-    NOTES.push({ type: 'white', midi: midi, letter: letter, num: num });
-    
-    if (midi >= midRangeNotes[0] && midi <= midRangeNotes[1]) {
-        letterToNote[midRangeLetters[midi - midRangeNotes[0]]] = midi;
-        noteToLetter[midi] = midRangeLetters[midi - midRangeNotes[0]];
-    }
-    
-    if (letter !== 'B' && letter !== 'E' && midi < 96) {
-        NOTES.push({ type: 'black', midi: midi + 1, letter: letter, num: num });
-        midi++;
-    
-        if (midi >= midRangeNotes[0] && midi <= midRangeNotes[1]) {
-            letterToNote[midRangeLetters[midi - midRangeNotes[0]]] = midi;
-            noteToLetter[midi] = midRangeLetters[midi - midRangeNotes[0]];
-        }
-    }
-    letterInd = (letterInd + 1) % 7;
-}
+const {NOTES, keyboardToMidi, midiToKeyboard, midiToNote} = getKeyConfigs();
 
 const audioCtx = new AudioContext();
 
-const DECAY_TIME = 0.3;
+const DECAY_TIME = 0.5;
 
-export default function Piano({ attrs, pianoRecRef, isRecording, setRecNotes }) {
+export default function Piano({ attrs, pianoRecRef, isRecording, addNoteToSheet, removePrevNote }) {
     const [pianoIsReady, setPianoIsReady] = useState(false);
 
     const pianoRef = useRef(null);
@@ -48,18 +17,24 @@ export default function Piano({ attrs, pianoRecRef, isRecording, setRecNotes }) 
     const [hasError, setError] = useState(false);
 
     useEffect(() => {
-        console.log('build', attrs.instrument);
+        const ins = attrs.instrument;
 
-        const piano = (attrs.instrument === 'splendid_grand_piano')
+        const piano = (ins === 'splendid_grand_piano')
             ? new SplendidGrandPiano(audioCtx)
-            : new Soundfont(audioCtx, { instrument: attrs.instrument });
+            : new Soundfont(audioCtx, { instrument: ins });
         setPianoIsReady(false);
+
+        let reverbNum = 0.1;
+        if (ins.indexOf("piano") != -1) {
+            reverbNum = 0.6;
+        }
+        console.log('build', ins, reverbNum);
 
         piano.load
             .then(() => {
                 setError(false);
                 setPianoIsReady(true);
-                piano.output.addEffect("reverb", new Reverb(audioCtx), 0.4);
+                piano.output.addEffect("reverb", new Reverb(audioCtx), reverbNum);
             })
             .catch(error => {
                 console.error('Error', error);
@@ -76,12 +51,11 @@ export default function Piano({ attrs, pianoRecRef, isRecording, setRecNotes }) 
             return;
 
         const key = e.key.toUpperCase();
-        if (letterToNote[key] || letterToNote[key] === 0) {
-            const note = letterToNote[key] + noteLowest;
+        const midi = keyboardToMidi[key];
+        if (midi || midi === 0) {
+            const note = midi + noteLowest;
             if (!pianoIsReady || isKeyDown[note])
                 return;
-
-            setRecNotes(prev => prev + key);
 
             audioCtx.resume();
             pianoRef.current.start({ note: note, velocity: 100, decayTime: DECAY_TIME });
@@ -93,15 +67,18 @@ export default function Piano({ attrs, pianoRecRef, isRecording, setRecNotes }) 
                 ...prev,
                 [note]: true
             }));
+
+            const newNote = formatNotation(midiToNote[midi]);
+            addNoteToSheet(newNote[0], newNote[1], midi < 24, e.key);
         } else if (key === 'BACKSPACE') {
-            setRecNotes(prev => prev.slice(0, prev.length - 1));
+            removePrevNote();
         }
     }
 
     function handleKeyup(e) {
         const key = e.key.toUpperCase();
-        if (letterToNote[key] || letterToNote[key] === 0) {
-            const note = letterToNote[key] + noteLowest;
+        if (keyboardToMidi[key] || keyboardToMidi[key] === 0) {
+            const note = keyboardToMidi[key] + noteLowest;
             pianoRef.current.stop(note);
             if (isRecording) {
                 pianoRecRef.current.stop(note);
@@ -124,7 +101,7 @@ export default function Piano({ attrs, pianoRecRef, isRecording, setRecNotes }) 
         return () => {
             window.removeEventListener("keydown", handleKeydown);
         }
-    }, [isKeyDown, isRecording, pianoIsReady, noteLowest]);
+    }, [isKeyDown, isRecording, pianoIsReady, noteLowest, removePrevNote]);
 
     useEffect(() => {
         window.addEventListener("keyup", handleKeyup);
@@ -150,7 +127,7 @@ export default function Piano({ attrs, pianoRecRef, isRecording, setRecNotes }) 
                                 displayLabel = letter + (type === 'black' ? '\u{266f}' : '');
                                 break;
                             case 'key':
-                                displayLabel = noteToLetter[midi - noteLowest] ? noteToLetter[midi - noteLowest] : '';
+                                displayLabel = midiToKeyboard[midi - noteLowest] ? midiToKeyboard[midi - noteLowest] : '';
                                 break;
                         }
 

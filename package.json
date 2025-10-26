@@ -9,9 +9,12 @@
     "@testing-library/user-event": "^13.5.0",
     "dexie": "^4.0.10",
     "dexie-react-hooks": "^1.1.7",
+    "jspdf": "^3.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
+    "svg2pdf.js": "^2.6.0",
+    "vexflow": "^5.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

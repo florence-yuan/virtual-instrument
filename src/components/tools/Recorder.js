@@ -172,7 +172,7 @@ export default function Recorder({ isOn, pianoRecRef, isRecording, setRecording,
                     className="tool__label"
                     onClick={() => { setListOpen(!isListOpen) }}
                 >
-                    Your recordings
+                    My recordings
                 </div>
                 <div className={"list-wrapper audio-list-wrapper" + (isListOpen ? ' on' : ' off')}>
                     <div className="list__heading">
@@ -182,7 +182,7 @@ export default function Recorder({ isOn, pianoRecRef, isRecording, setRecording,
                                 setListOpen(false);
                             }}
                         />
-                        <h1>Your recordings</h1>
+                        <h1>My recordings</h1>
                     </div>
                     {audioDb && <div ref={listRef} className="list audio-list">
                         {audioDb.length === 0 && <div>

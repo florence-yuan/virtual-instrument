@@ -107,6 +107,7 @@
 }
 
 .pendulum.on {
+    pointer-events: none;
     animation-name: beat;
     animation-duration: 1s;
     animation-direction: alternate;
@@ -180,9 +181,9 @@
 
 .metro__btn:hover {
     cursor: pointer;
-    background-color: rgba(238, 130, 238, 0.7);
+    background-color: var(--violet-focus);
 }
 
 .metro__btn:active {
-    border: 1px solid rgb(255, 183, 255);
+    border: 1px solid var(--piano-border-color2);
 }
