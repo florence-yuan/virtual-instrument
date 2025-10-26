@@ -77,28 +77,3 @@ export function formatNotation(note) {
     }
     return [`${note[0].toLowerCase()}/${note[1]}`, null];
 }
-
-export async function loadTtfAsBase64(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const arrayBuffer = await response.arrayBuffer(); // Get the file content as an ArrayBuffer
-
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                // The result will be a data URL (e.g., "data:application/font-ttf;base64,...")
-                // We need to extract the Base64 part.
-                const base64String = reader.result.split(',')[1];
-                resolve(base64String);
-            };
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(new Blob([arrayBuffer], { type: 'application/font-ttf' }));
-        });
-    } catch (error) {
-        console.error("Error loading TTF file:", error);
-        throw error;
-    }
-}

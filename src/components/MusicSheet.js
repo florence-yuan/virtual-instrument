@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 import { Renderer, TickContext } from "vexflow";
-// import jsPDF from "jspdf";
-// import 'svg2pdf.js'
-// import '../fonts/bravura/Bravura-normal.js'
-// import { loadTtfAsBase64 } from "./tools/UtilFuncs";
 
 import { createNewStave } from "./music_display"
 
@@ -79,26 +75,6 @@ export default function MusicSheet({ ctxRef, tickCtxRef, staveRef, rendererRef, 
 
     return (
         <div ref={viewportRef} className={"sheet-overlay" + (hide ? " hidden" : "")}>
-            {/*             <button
-            onClick={() => {
-                rendererRef.current.resize(SHEET_WIDTH, 1000);
-            }}
-            >Resize!</button> */}
-            {/* <button */}
-            {/*                 onClick={async () => {
-                                const [width, height, x, y] = [800, 1000, 0, 0];
-                                const doc = new jsPDF(width > height ? 'l' : 'p', 'pt', [width, height]);
-                                doc.setFont("Bravura");
-                                doc.text('', 100, 100);
-            
-                                // doc.save('score.pdf')
-            
-                                const svgElement = document.getElementById("music-sheet").childNodes[0];
-                                doc
-                                    .svg(svgElement, { x, y, width, height })
-                                    .then(() => doc.save('score.pdf'));
-                            }} */}
-            {/* >Save to PDF!</button> */}
             <div className="sheet-viewport">
                 <div id="music-sheet"></div>
             </div>

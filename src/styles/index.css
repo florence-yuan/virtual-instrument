@@ -18,13 +18,6 @@
     --dark-violet-bg: #504458;
 }
 
-/* @font-face {
-    font-family: 'Bravura';
-    font-weight: 400;
-    font-style: normal;
-    src: url('../fonts/bravura/Bravura.ttf') format('truetype');
-} */
-
 #myCanvas {
     position: fixed;
     top: 5rem;
@@ -33,8 +26,6 @@
 
 body {
     overflow: hidden;
-    /* background-image: url(../images/velvet3.jpg); */
-    /* background-size: cover; */
 }
             
 body, button, input, textarea {

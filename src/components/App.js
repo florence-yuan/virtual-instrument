@@ -3,14 +3,12 @@ import { Accidental, StaveNote, TextNote } from "vexflow";
 
 import Piano from "./Piano";
 import Toolbar from "./Toolbar";
-// import Notepad from "./tools/Notepad";
 import NavBar from "./NavBar";
 
 import { createNewStave } from "./music_display"
 
 const NOTE_START_X = 15;
 const NOTE_SPACING = 40;
-const NOTE_WIDTH = 20;
 const NUM_NOTES_PER_LINE = 17;
 const SHEET_WIDTH = 800;
 
@@ -49,13 +47,10 @@ export default function App() {
 	function addNoteToSheet(note, accidental, labelFloat, key) {
 		if (!isSheetRec)
 			return;
-		// const newAnno = new Annotation(key);
-		// newAnno.VerticalJustify = AnnotationVerticalJustify.BOTTOM;
 
-		// const label = new Annotation(key).setVerticalJustification(AnnotationVerticalJustify.BOTTOM);
 		const newNote = new StaveNote({
 			keys: [note], duration: "w"
-		})/* .addModifier(label) */;
+		});
 
 		const context = ctxRef.current;
 		const tickContext = tickCtxRef.current;
@@ -66,7 +61,6 @@ export default function App() {
 		}
 
 		const svgID = newNote.getAttribute('id');
-		// console.log('svgID', svgID)
 
 		const label = new TextNote({ duration: 'w', text: key });
 		label.setContext(context).setStave(staveRef.current).setX(-5).setY(labelFloat ? 60 : 100);
@@ -78,17 +72,13 @@ export default function App() {
 		newNote.draw();
 		label.draw();
 
-		// Formatter.FormatAndDraw(context, staveRef.current, [newNote]);
-
 		if (noteID % NUM_NOTES_PER_LINE === NUM_NOTES_PER_LINE - 1) {
-			// console.log("!!!NEW LINE!!!", sheetOuter);
 			setNoteX(NOTE_START_X);
 
 			let curLine = Math.floor((noteID + 1) / NUM_NOTES_PER_LINE);
 			staveRef.current = createNewStave(ctxRef, curLine);
 
 			if (curLine > 2 && sheetOuter) {
-				// console.log(rendererRef.current)
 				rendererRef.current.resize(SHEET_WIDTH, 343 + (curLine - 2) * 110);
 				sheetOuter.scrollTo({
 					top: 10 + 110 * (curLine - 2),
@@ -113,7 +103,6 @@ export default function App() {
 			return;
 
 		const prevSvgID = noteHistory[noteHistory.length - 1];
-		// console.log('remove', prevSvgID);
 
 		document.querySelector("#vf-" + prevSvgID + " + text").remove();
 		document.getElementById("vf-" + prevSvgID).remove();
