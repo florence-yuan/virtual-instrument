@@ -75,8 +75,10 @@ export default function MusicSheet({ ctxRef, tickCtxRef, staveRef, rendererRef, 
 
     return (
         <div ref={viewportRef} className={"sheet-overlay" + (hide ? " hidden" : "")}>
+            <p className="sheet__dir">...Start typing to play</p>
             <div className="sheet-viewport">
-                <div id="music-sheet"></div>
+                <div id="music-sheet">
+                </div>
             </div>
             <div className="sheet__sidebar">
                 {sheetActions.map(({ name, icon, action }) => (

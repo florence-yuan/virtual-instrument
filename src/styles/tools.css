@@ -206,6 +206,7 @@
 
 .tool__extend.folded {
     height: max-content;
+    z-index: 25 !important;
     /* pointer-events: none !important; */
 }
 
@@ -215,6 +216,10 @@
     pointer-events: all;
     /* overflow: auto; */
     clip-path: inset(0);
+}
+
+.tool__extend.on {
+    z-index: 35;
 }
 
 .tool__extend.off {

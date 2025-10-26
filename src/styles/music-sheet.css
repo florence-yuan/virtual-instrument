@@ -1,3 +1,7 @@
+.sheet__dir {
+    color: black;
+}
+
 .sheet-overlay {
     position: absolute;
     top: -5.26rem;
