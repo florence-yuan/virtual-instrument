@@ -121,6 +121,11 @@
     gap: 0.8rem;
 }
 
+.tool__static-btn {
+    position: relative;
+    z-index: 30;
+}
+
 .tool__btn:hover {
     cursor: pointer;
 }
