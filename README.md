@@ -8,7 +8,7 @@ A virtual piano made with React; supports the violin, guitar, flute, etc. Play a
 
 Make a recording by pressing the circle.
 
-Go to 'Your Recordings' to view your recordings. You may download, delete, and rename your recordings.
+Go to 'My Recordings' to view your recordings. You may download, delete, and rename your recordings.
 
 ![View of my Recordings](assets/piano_recordings_view.png)
 
@@ -21,3 +21,7 @@ Go to 'Your Recordings' to view your recordings. You may download, delete, and r
 ![View of metronome](assets/piano_metronome.png)
 
 Click / drag to change the tempo.  Click 'start' to begin, and click the resize button to minimize the metronome window.
+
+## Dependencies
+- smplr 0.16.3 (for sound samples)
+- vexflow 5.0.0 (for music score rendering)
