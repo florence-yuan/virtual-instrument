@@ -2,7 +2,7 @@ const displayList = [
     'key', 'note'
 ];
 
-export default function Display({displayMode, setAttrs, CloseBtn}) {
+export default function Display({displayMode, setAttrs, CloseBtn, closeTools}) {
     return (
         <>
             <div className="tool__extend">
@@ -22,6 +22,7 @@ export default function Display({displayMode, setAttrs, CloseBtn}) {
                                             ...prev,
                                             displayMode: dm
                                         }));
+                                        closeTools();
                                     }}
                                 >
                                     <div className="display__text">

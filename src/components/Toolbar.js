@@ -30,20 +30,20 @@ function Tool({ isOn, label, tool, setTool, children }) {
 export default function Toolbar({ pianoRecRef, isRecording, setRecording, attrs, setAttrs, ctxRef, tickCtxRef, staveRef, rendererRef, setSheetRec, clearSheet }) {
     const [curTool, setTool] = useState(null);
 
+    function closeTools() {
+        setTool(null);
+    }
+
     const CloseBtn = <button
         className="btn--icon extend__close"
         title="Close"
-        onClick={() => {
-            setTool(null);
-        }}
+        onClick={closeTools}
     />;
 
     const BackBtn = <button
         className="btn--icon extend__back"
         title="Close"
-        onClick={() => {
-            setTool(null);
-        }}
+        onClick={closeTools}
     />;
 
     const tools = [
@@ -66,6 +66,7 @@ export default function Toolbar({ pianoRecRef, isRecording, setRecording, attrs,
                 instrument={attrs.instrument}
                 setAttrs={setAttrs}
                 CloseBtn={BackBtn}
+                closeTools={closeTools}
             />
         },
         {
@@ -75,6 +76,7 @@ export default function Toolbar({ pianoRecRef, isRecording, setRecording, attrs,
                 displayMode={attrs.displayMode}
                 setAttrs={setAttrs}
                 CloseBtn={BackBtn}
+                closeTools={closeTools}
             />
         },
         {

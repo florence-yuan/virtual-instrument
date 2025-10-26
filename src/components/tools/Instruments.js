@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Instruments({instrument, setAttrs, CloseBtn}) {
+export default function Instruments({instrument, setAttrs, CloseBtn, closeTools}) {
     const [instrumentList, setInstrumentList] = useState([]);
 
     useEffect(() => {
@@ -49,6 +49,9 @@ export default function Instruments({instrument, setAttrs, CloseBtn}) {
                                             ...prev,
                                             instrument: ins
                                         }));
+                                        setTimeout(() => {
+                                            closeTools();
+                                        }, 500);
                                     }}
                                 >
                                     {ins.split('_').join(' ')}
