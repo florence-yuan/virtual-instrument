@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/virtual-instrument/static/css/main.71996bda.css",
-    "main.js": "/virtual-instrument/static/js/main.f406d09b.js",
+    "main.css": "/virtual-instrument/static/css/main.1befa2c5.css",
+    "main.js": "/virtual-instrument/static/js/main.bcaca4e3.js",
     "static/js/453.d4e57216.chunk.js": "/virtual-instrument/static/js/453.d4e57216.chunk.js",
     "static/media/wood2.jpg": "/virtual-instrument/static/media/wood2.8cc766bf2a9df6610347.jpg",
     "static/media/gold_texture.avif": "/virtual-instrument/static/media/gold_texture.f7ec49bf4ca9b955e533.avif",
@@ -23,12 +23,12 @@
     "static/media/enlarge.svg": "/virtual-instrument/static/media/enlarge.8a48beb09be22de3aa0e46a15db00bb2.svg",
     "static/media/back.svg": "/virtual-instrument/static/media/back.96471cc888c50c420c48.svg",
     "static/media/pause.svg": "/virtual-instrument/static/media/pause.53c4a56462215e0d966a.svg",
-    "main.71996bda.css.map": "/virtual-instrument/static/css/main.71996bda.css.map",
-    "main.f406d09b.js.map": "/virtual-instrument/static/js/main.f406d09b.js.map",
+    "main.1befa2c5.css.map": "/virtual-instrument/static/css/main.1befa2c5.css.map",
+    "main.bcaca4e3.js.map": "/virtual-instrument/static/js/main.bcaca4e3.js.map",
     "453.d4e57216.chunk.js.map": "/virtual-instrument/static/js/453.d4e57216.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.71996bda.css",
-    "static/js/main.f406d09b.js"
+    "static/css/main.1befa2c5.css",
+    "static/js/main.bcaca4e3.js"
   ]
 }
