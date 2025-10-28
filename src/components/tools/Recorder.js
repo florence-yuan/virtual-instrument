@@ -4,6 +4,7 @@ import AudioWrapper from "./AudioWrapper";
 import { formatDuration } from "./UtilFuncs";
 import { db } from "../database";
 import { useLiveQuery } from "dexie-react-hooks";
+import getBlobDuration from "get-blob-duration";
 
 const audioCtx = new AudioContext();
 
@@ -116,13 +117,14 @@ export default function Recorder({ isOn, pianoRecRef, isRecording, setRecording,
                 const tempAudio = new Audio();
                 tempAudio.src = src;
 
-                tempAudio.addEventListener('canplaythrough', () => {
+                tempAudio.addEventListener('canplaythrough', async () => {
                     const id = audioDb.length + 1;
+                    const audioDur = await getBlobDuration(blob);
 
                     db.recordings.put({
                         order: -1 * id,
                         title: 'Recording ' + id,
-                        duration: tempAudio.duration,
+                        duration: audioDur,
                         blob: blob
                     }, -1 * id);
 
