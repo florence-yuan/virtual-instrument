@@ -15,10 +15,10 @@
 .sheet-overlay::before {
     content: "";
     position: fixed;
-    top: -10vh;
+    top: -20vh;
     left: -30vw;
     width: 150vw;
-    height: 110vh;
+    height: 120vh;
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
     pointer-events: none;
@@ -40,7 +40,7 @@
 
 .sheet-overlay.enlarged {
     position: absolute;
-    top: -5rem;
+    top: -7vh;
     left: 50%;
     height: 85vh;
     transform: translateX(-50%) translateZ(3px);
